@@ -40,4 +40,5 @@ class LoginFragment : Fragment() {
     private fun navigation(){
         findNavController().navigate(R.id.action_loginFragment_to_signupFragment)
     }
+
 }

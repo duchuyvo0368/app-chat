@@ -5,4 +5,8 @@
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="tv_name">Name</string>
     <string name="btn_sign_up">Sign Up</string>
+    <string name="welcome_to_quick_chat">Welcome to Quick Chat</string>
+    <string name="login">login</string>
+    <string name="create_account">create account</string>
+    <string name="login_or_create_an_account_to_get_started">Login or create an account to get started</string>
 </resources>

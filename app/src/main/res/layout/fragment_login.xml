@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.example.appchat.ui.start.LoginViewModel" />
+            type="com.example.appchat.ui.start.login.LoginViewModel" />
     </data>
 
     <ScrollView
@@ -18,7 +18,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            tools:context=".ui.start.LoginFragment">
+            tools:context=".ui.start.login.LoginFragment">
 
             <LinearLayout
                 android:id="@+id/linear1"

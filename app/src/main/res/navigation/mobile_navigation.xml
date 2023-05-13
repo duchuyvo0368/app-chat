@@ -3,23 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.appchat.ui.start.LoginFragment"
+        android:name="com.example.appchat.ui.start.login.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_signupFragment"
-            app:destination="@id/signupFragment" />
+            android:id="@+id/action_loginFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment" />
     </fragment>
-    <fragment android:id="@+id/signupFragment"
-        android:name="com.example.appchat.ui.createAccount.SignupFragment"
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.appchat.ui.start.createAccount.SignupFragment"
         android:label="Signup"
         tools:layout="@layout/fragment_signup">
         <action
-            android:id="@+id/action_signupFragment_to_loginFragment"
+            android:id="@+id/action_signupFragment_to_chatsFragment"
+            app:destination="@id/chatsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatsFragment"
+        android:name="com.example.appchat.ui.chats.ChatsFragment"
+        android:label="Chats"
+        tools:layout="@layout/fragment_chats" />
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.appchat.ui.start.StartFragment"
+        android:label="Start">
+        <action
+            android:id="@+id/action_startFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-
 </navigation>

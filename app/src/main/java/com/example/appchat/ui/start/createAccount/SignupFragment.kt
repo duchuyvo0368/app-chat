@@ -1,4 +1,4 @@
-package com.example.appchat.ui.createAccount
+package com.example.appchat.ui.start.createAccount
 
 
 import android.os.Bundle

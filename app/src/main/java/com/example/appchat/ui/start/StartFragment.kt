@@ -46,4 +46,8 @@ class StartFragment : Fragment() {
     private fun navigateToLogin() {
         findNavController().navigate(R.id.action_startFragment_to_loginFragment)
     }
+
+    private fun navigateToCreateAccount() {
+        findNavController().navigate(R.id.action_startFragment_to_registerFragment)
+    }
 }

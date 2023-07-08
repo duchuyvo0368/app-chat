@@ -4,12 +4,16 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -44,42 +48,54 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.startFragment -> {
                     navView.visibility = View.GONE
-                    supportActionBar?.hide()
+                    mainToolBar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
                 }
                 R.id.loginFragment -> {
                     navView.visibility = View.GONE
-                    supportActionBar?.hide()
+                    mainToolBar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
                 }
-                R.id.signupFragment -> {
+                R.id.registerFragment -> {
                     navView.visibility = View.GONE
-                    supportActionBar?.hide()
+                    mainToolBar.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
                 }
-                else -> navView.visibility = View.VISIBLE
+                else -> {
+                    navView.visibility = View.VISIBLE
+                    mainToolBar.setBackgroundColor(ContextCompat.getColor(this, R.color.purple_200))
+                }
             }
             showGlobalProgressBar(false)
             currentFocus?.rootView?.forceHideKeyboard()
         }
+
+        //ẩn nút back toolbar
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_chats,
-                R.id.navigation_notifications,
-                R.id.navigation_user,
-                R.id.navigation_settings,
-                R.id.startFragment
-            )
+                R.id.loginFragment,
+                R.id.registerFragment,
+                R.id.startFragment,
+
+                )
         )
+        //dong bo hóa navigationUI voi actionbar
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onPause() {
+        super.onPause()
+    }
 
+    override fun onResume() {
+        super.onResume()
     }
 
     fun showGlobalProgressBar(show: Boolean) {
         if (show) mainProgressBar.visibility = View.VISIBLE
         else mainProgressBar.visibility = View.GONE
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        return super.onPrepareOptionsMenu(menu)
     }
 
 

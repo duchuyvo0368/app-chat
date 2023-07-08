@@ -1,10 +1,10 @@
 package com.example.appchat.ui.start.login
 
+import android.content.Context
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -20,15 +20,13 @@ class LoginFragment : Fragment() {
     private val viewModel by viewModels<LoginViewModel>()
     private lateinit var viewDataBinding: FragmentLoginBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel.snackBarText.observe(this, Observer {
-
-        })
-
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
     }
+
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +37,12 @@ class LoginFragment : Fragment() {
             .apply { viewmodel = viewModel }
         //quan sát dữ liệu LiveData và cập nhập lên UI
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
-
+        setHasOptionsMenu(true)
         return viewDataBinding.root
     }
+
+
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -49,10 +50,10 @@ class LoginFragment : Fragment() {
         setupObservers()
     }
 
+
+
+
     private fun setupObservers() {
-
-
-        
         viewModel.dataLoading.observe(
             viewLifecycleOwner,
             EventObserver {
@@ -63,17 +64,50 @@ class LoginFragment : Fragment() {
         //đăng nhập thành công
         viewModel.isLoggedInEvent.observe(viewLifecycleOwner,
             EventObserver {
-                navigation()
+                navigationToChats()
         })
         //show message
         viewModel.snackBarText.observe(viewLifecycleOwner,
             EventObserver { text ->
                 view?.showSnackBar(text)
             })
+        viewModel.createAccount.observe(viewLifecycleOwner,EventObserver{
+            navigationCreateAccount()
+        })
+        viewModel.rememberMe.observe(viewLifecycleOwner,EventObserver{ rememberMe ->
+
+        })
     }
 
-    private fun navigation() {
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+             R.id.menu_close-> {
+                findNavController().popBackStack()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.button_close,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+
+    private fun navigationToChats() {
         findNavController().navigate(R.id.action_loginFragment_to_chatsFragment)
     }
+
+
+
+    private fun navigationCreateAccount(){
+        findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+    }
+
 
 }

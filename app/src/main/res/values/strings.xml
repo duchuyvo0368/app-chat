@@ -9,4 +9,5 @@
     <string name="login">login</string>
     <string name="create_account">create account</string>
     <string name="login_or_create_an_account_to_get_started">Login or create an account to get started</string>
+    <string name="icon">Icon</string>
 </resources>

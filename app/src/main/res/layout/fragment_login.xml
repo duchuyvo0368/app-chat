@@ -20,6 +20,7 @@
             android:background="?android:attr/windowBackground"
             tools:context=".ui.start.login.LoginFragment">
 
+
             <LinearLayout
                 android:id="@+id/linear1"
                 android:layout_width="fill_parent"
@@ -37,30 +38,7 @@
                     android:orientation="horizontal"
                     >
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:fontFamily="sans-serif-condensed"
-                        android:gravity="start"
-                        android:text="Log in"
-                        android:textColor="@color/black"
-                        android:textSize="30sp" />
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:strokeColor="@android:color/darker_gray"
-                        app:strokeWidth="0.5dp"
-                        app:cardCornerRadius="15dp"
-                        >
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:padding="5dp"
-                            android:src="@drawable/baseline_close_24" />
-                    </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
 
@@ -68,7 +46,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="15dp"
                     app:cardCornerRadius="10dp"
                     app:strokeColor="@android:color/darker_gray"
                     app:strokeWidth="1dp">
@@ -193,7 +171,7 @@
                 app:layout_constraintStart_toEndOf="@id/cb_remember"
                 app:layout_constraintTop_toBottomOf="@id/linear2" />
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
@@ -259,10 +237,12 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:onClickListener="@{() ->viewmodel.goToCreateAccountPressed()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:alpha="0.7"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center_horizontal"
                     android:text="Sign up"
                     android:textColor="@color/purple_500" />

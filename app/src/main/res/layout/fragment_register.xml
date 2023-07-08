@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="com.example.appchat.ui.start.createAccount.RegisterViewModel" />
     </data>
 
     <ScrollView
@@ -30,43 +32,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
 
-                    >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="10"
-                        android:fontFamily="sans-serif-condensed"
-                        android:gravity="start"
-                        android:text="Sign Up"
-                        android:textColor="@color/black"
-                        android:textSize="30sp" />
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        app:strokeColor="@android:color/darker_gray"
-                        app:strokeWidth="0.5dp"
-                        app:cardCornerRadius="15dp"
-                        >
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:padding="5dp"
-                            android:src="@drawable/baseline_close_24" />
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
                     android:textAllCaps="false"
                     app:cardCornerRadius="10dp"
                     app:strokeColor="#ECE4E4"
@@ -89,7 +60,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="10dp"
-                            android:text="Sign up with google"
+                            android:text="@string/sign_up_with_google"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -142,8 +113,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:inputType="textNoSuggestions"
-                        android:text="" />
+                        android:inputType="textPersonName"
+                        android:text="@={viewmodel.displayName}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -163,10 +134,12 @@
                     android:layout_marginTop="5dp">
 
                     <EditText
+                        android:ems="10"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:inputType="textNoSuggestions"
-                        android:text="" />
+                        android:importantForAutofill="no"
+                        android:inputType="textEmailAddress"
+                        android:text="@={viewmodel.emailText}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,12 +163,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:inputType="textPassword"
-                        android:text="" />
+                        android:text="@={viewmodel.passwordText}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <include
-                android:id="@+id/progress"
+                android:id="@+id/passwordStrengthDashboard"
                 layout="@layout/layout_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -223,19 +196,19 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 app:layout_constraintStart_toEndOf="@id/cb_remember"
-                app:layout_constraintTop_toBottomOf="@id/progress" />
+                app:layout_constraintTop_toBottomOf="@id/passwordStrengthDashboard" />
 
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-
                 android:layout_marginStart="20dp"
-
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="20dp"
                 android:alpha="0.7"
+                android:enabled="@{!viewmodel.isCreatingAccount()}"
+                android:onClick="@{()->viewmodel.createAccountPressed()}"
                 android:backgroundTint="@color/purple_500"
                 android:text="@string/btn_sign_up"
                 android:textAllCaps="false"
@@ -252,11 +225,10 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
-                android:alpha="0.6"
+                android:alpha="0.5"
                 android:gravity="center_horizontal"
                 android:text="Forgot Password?"
                 android:textColor="#0F2DE8"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/btn_login" />
@@ -297,9 +269,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:alpha="0.7"
+                    android:onClickListener="@{() -> viewmodel.goToLoginAccountPressed()}"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center_horizontal"
                     android:text="Log in"
+                    android:layout_marginBottom="25dp"
                     android:textColor="@color/purple_500" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

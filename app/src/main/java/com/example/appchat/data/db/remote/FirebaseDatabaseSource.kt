@@ -6,6 +6,8 @@ import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.database.*
 import com.example.appchat.data.Result
+import com.example.appchat.data.db.entity.UserNotification
+import com.example.appchat.data.db.entity.UserRequest
 import java.lang.Exception
 
 
@@ -15,6 +17,7 @@ class FirebaseDataSource() {
 
     }
 
+    //
     private fun attachValueListenerToTaskCompletion(src: TaskCompletionSource<DataSnapshot>): ValueEventListener {
         return (object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -59,9 +62,22 @@ class FirebaseDataSource() {
     fun loadFriendsTask(userID: String): Task<DataSnapshot> {
         val src = TaskCompletionSource<DataSnapshot>()
         val listener = attachValueListenerToTaskCompletion(src)
-        refPath("users/$userID").addListenerForSingleValueEvent(listener)
+        refPath("users/$userID/friends").addListenerForSingleValueEvent(listener)
         return src.task
     }
+    fun loadUserInfoTask(userID:String):Task<DataSnapshot>{
+        val src=TaskCompletionSource<DataSnapshot>()
+        val listener=attachValueListenerToTaskCompletion(src)
+        refPath("users/$userID/info").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
+    fun loadUsersTask():Task<DataSnapshot>{
+        val src=TaskCompletionSource<DataSnapshot>()
+        val listener=attachValueListenerToTaskCompletion(src)
+        refPath("users").addListenerForSingleValueEvent(listener)
+        return src.task
+    }
+
 
     fun <T> attachChatObserver(
         resultClassName: Class<T>,
@@ -70,6 +86,21 @@ class FirebaseDataSource() {
         b: ((Result<T>) -> Unit)
     ) {
         val listener = attachValueListenerToBlock(resultClassName, b)
+    }
+
+    fun loadUserTask(userID: String): Task<DataSnapshot> {
+        val src=TaskCompletionSource<DataSnapshot>()
+        val listener=attachValueListenerToTaskCompletion(src)
+        refPath("users/$userID")
+        return src.task
+    }
+
+    fun updateNewSentRequest(userID: String, userRequest: UserRequest) {
+        refPath("users/${userID}/sentRequests/${userRequest.userID}").setValue(userRequest)
+    }
+
+    fun updateNewNotification(otherUserID: String, userNotification: UserNotification) {
+        refPath("users/${otherUserID}/notifications/${userNotification.userID}").setValue(userNotification)
     }
 
 

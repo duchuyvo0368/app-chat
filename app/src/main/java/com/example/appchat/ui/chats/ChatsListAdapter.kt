@@ -15,6 +15,8 @@ class ChatDiffCallback :DiffUtil.ItemCallback<ChatWithUserInfo>(){
         return oldItem==newItem
     }
 
+
+    //so sanh noi dung duy nhat(id)
     override fun areContentsTheSame(oldItem: ChatWithUserInfo, newItem: ChatWithUserInfo): Boolean {
         return oldItem.mChat.info.id==newItem.mChat.info.id
     }

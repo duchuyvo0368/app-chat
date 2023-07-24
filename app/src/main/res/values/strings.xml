@@ -10,4 +10,10 @@
     <string name="create_account">create account</string>
     <string name="login_or_create_an_account_to_get_started">Login or create an account to get started</string>
     <string name="icon">Icon</string>
+    <string name="display_name">DisplayName</string>
+    <string name="status">Status</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="title_settings">title setting</string>
+    <string name="users">Users</string>
+    <string name="profile">Profile</string>
 </resources>

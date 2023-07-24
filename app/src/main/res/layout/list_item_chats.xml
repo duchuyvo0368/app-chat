@@ -56,7 +56,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:text="@{chatwithuserinfo.MyInfo.displayName}"
+
                 android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/timeText"
@@ -69,8 +69,8 @@
                 android:layout_height="wrap_content"
                 android:singleLine="true"
                 android:textSize="14sp"
-                app:bind_chat_message_text="@{chatwithuserinfo.MChat.lastMessage}"
-                app:bind_chat_message_text_viewModel="@{viewmodel}"
+
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 tools:text="Message"

@@ -14,9 +14,9 @@ class AuthRepository {
     fun loginUser(login: Login, b: (Result<FirebaseUser>) -> Unit) {
         b.invoke(Result.Loading)
         firebaseAuthSource.loginWithEmailAndPassword(login)
-            .addOnCompleteListener {//khi requestLogin() được thực hiện xong thì gọi đến addOnComplete..
+            .addOnSuccessListener {//khi requestLogin() được thực hiện xong thì gọi đến addOnComplete..
                 //invoke() truyen kq den Result
-                b.invoke(Result.Success(it.result.user))//dang nha thanh cong
+                b.invoke(Result.Success(it.user))//dang nha thanh cong
             }.addOnFailureListener {
             b.invoke(Result.Error(msg = it.message))//dang nhap that bai
         }

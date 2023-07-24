@@ -20,14 +20,14 @@ import com.example.appchat.ui.updateItemAt
 
 
 //tạo ra môt viewmodel để truyen tham so vào hàm khoi tao
-class ChatsViewModelFactory(private val myUserId: String) : ViewModelProvider.Factory {
+class ChatsViewModelFactory(private val myUserID: String) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return ChatsViewModel(myUserId) as T
+        return ChatsViewModel(myUserID) as T
     }
 }
 
 
-class ChatsViewModel(val myUserId: String) : DefaultViewModel() {
+class ChatsViewModel(val myUserID: String) : DefaultViewModel() {
     private val repository: DatabaseRepository = DatabaseRepository()
     private val firebaseReferenceObserverList = ArrayList<FirebaseReferenceValueObserver>()
     private val _updatedChatWithUserInfo = MutableLiveData<ChatWithUserInfo>()
@@ -35,17 +35,17 @@ class ChatsViewModel(val myUserId: String) : DefaultViewModel() {
 
     var selectedChat: LiveData<Event<ChatWithUserInfo>> = _selectedChat
 
-    //MediatorLiveData ket hop dư lieu 2 livedata,vua lang nghe va update
+    //MediatorLiveData ket hop dư lieu 2 livedata,vừa lang nghe va update
     var chatsList = MediatorLiveData<MutableList<ChatWithUserInfo>>()
 
 
     init {
         //addSource dung them mo livedata vao MediatorLiveData va xu ly logic
         chatsList.addSource(_updatedChatWithUserInfo) { newChat ->
-            val chat = chatsList.value?.find { it.mChat.info.id == newChat.mChat.info.id }
-            if (chat == null) {
+                val chat = chatsList.value?.find { it.mChat.info.id == newChat.mChat.info.id }//tim kiếm trò chuyện trong ds(find:tìm thấy)
+            if (chat == null) {//thêm mới
                 chatsList.addNewItem(newChat)
-            } else {
+            } else {//cập nhật lại
                 chatsList.updateItemAt(newChat, chatsList.value!!.indexOf(chat))
             }
         }
@@ -57,7 +57,7 @@ class ChatsViewModel(val myUserId: String) : DefaultViewModel() {
     }
 
     private fun loadFriends() {
-        repository.loadFriends(myUserId) { result: Result<List<UserFriend>> ->
+        repository.loadFriends(myUserID) { result: Result<List<UserFriend>> ->
             onResult(null, result)
             if (result is Result.Success)
                 result.data?.forEach { loadUserInfo(it) }
@@ -74,7 +74,7 @@ class ChatsViewModel(val myUserId: String) : DefaultViewModel() {
     private fun loadAndObserveChat(userInfo: UserInfo) {
         val observer = FirebaseReferenceValueObserver()
         firebaseReferenceObserverList.add(observer)
-        repository.loadAndObserveChat(convertTowUserIDs(myUserId,userInfo.id),observer){result:Result<Chat>->
+        repository.loadAndObserveChat(convertTowUserIDs(myUserID,userInfo.id),observer){result:Result<Chat>->
             if (result is Result.Success) {
                 _updatedChatWithUserInfo.value=result.data?.let { ChatWithUserInfo(it,userInfo) }
             }else if (result is Result.Error) {
@@ -86,6 +86,9 @@ class ChatsViewModel(val myUserId: String) : DefaultViewModel() {
             }
         }
 
+    }
+    fun selectChatWithUserInfoPressed(chat:ChatWithUserInfo){
+        _selectedChat.value=Event(chat)
     }
 
 }

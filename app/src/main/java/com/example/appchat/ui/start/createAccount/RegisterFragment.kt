@@ -13,6 +13,7 @@ import com.example.appchat.R
 import com.example.appchat.data.EventObserver
 import com.example.appchat.databinding.FragmentRegisterBinding
 import com.example.appchat.showSnackBar
+import com.example.appchat.ui.SharedPreferencesUtil
 import com.example.appchat.ui.main.MainActivity
 
 
@@ -55,6 +56,7 @@ class RegisterFragment : Fragment() {
             navigationLogin()
         })
         viewModel.isCreateEvent.observe(viewLifecycleOwner,EventObserver{
+            SharedPreferencesUtil.saveUserID(requireContext(),it.uid)
             navigationChats()
         })
     }

@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.appchat.AppChat
 import com.example.appchat.R
+import com.example.appchat.data.EventObserver
+import com.example.appchat.data.model.ChatWithUserInfo
 import com.example.appchat.databinding.FragmentChatsBinding
 
 
 class ChatsFragment : Fragment() {
-    private val  viewModel:ChatsViewModel by viewModels { ChatsViewModelFactory(AppChat.myUserId) }
+    private val  viewModel:ChatsViewModel by viewModels { ChatsViewModelFactory(AppChat.myUserID) }
     private lateinit var viewDataBinding:FragmentChatsBinding
     private lateinit var listAdapter:ChatsListAdapter
 
@@ -33,6 +35,16 @@ class ChatsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setupListAdapter()
+        setupObserver()
+    }
+
+    private fun setupObserver() {
+        viewModel.selectedChat.observe(viewLifecycleOwner,
+        EventObserver{navigationToChat(it)})
+    }
+
+    private fun navigationToChat(chatWithUserInfo: ChatWithUserInfo) {
+
     }
 
     private fun setupListAdapter() {

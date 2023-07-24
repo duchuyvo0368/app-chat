@@ -41,6 +41,9 @@ class StartFragment : Fragment() {
         viewModel.loginEvent.observe(viewLifecycleOwner, EventObserver {
             navigateToLogin()
         })
+        viewModel.createAccountEvent.observe(viewLifecycleOwner,EventObserver{
+            navigateToCreateAccount()
+        })
     }
 
     private fun navigateToLogin() {

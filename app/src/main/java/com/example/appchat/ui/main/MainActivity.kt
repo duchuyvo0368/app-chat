@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navView: BottomNavigationView
     private lateinit var mainProgressBar: ProgressBar
     private lateinit var mainToolBar: Toolbar
-    private lateinit var notification: BadgeDrawable
+
     private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +73,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment,
                 R.id.registerFragment,
                 R.id.startFragment,
-
+                R.id.navigation_notifications,
+                R.id.navigation_settings,
+                R.id.navigation_chats,
+                R.id.navigation_user
                 )
         )
         //dong bo hóa navigationUI voi actionbar

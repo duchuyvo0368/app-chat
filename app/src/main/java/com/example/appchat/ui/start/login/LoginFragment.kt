@@ -1,6 +1,7 @@
 package com.example.appchat.ui.start.login
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.appchat.R
 import com.example.appchat.data.EventObserver
 import com.example.appchat.databinding.FragmentLoginBinding
 import com.example.appchat.showSnackBar
+import com.example.appchat.ui.SharedPreferencesUtil
 import com.example.appchat.ui.main.MainActivity
 
 
@@ -64,6 +66,7 @@ class LoginFragment : Fragment() {
         //đăng nhập thành công
         viewModel.isLoggedInEvent.observe(viewLifecycleOwner,
             EventObserver {
+                SharedPreferencesUtil.saveUserID(requireContext(),it.uid)
                 navigationToChats()
         })
         //show message
@@ -72,6 +75,7 @@ class LoginFragment : Fragment() {
                 view?.showSnackBar(text)
             })
         viewModel.createAccount.observe(viewLifecycleOwner,EventObserver{
+
             navigationCreateAccount()
         })
         viewModel.rememberMe.observe(viewLifecycleOwner,EventObserver{ rememberMe ->

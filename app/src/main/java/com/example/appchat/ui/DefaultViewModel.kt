@@ -14,15 +14,18 @@ abstract class DefaultViewModel : ViewModel() {
     val dataLoading: LiveData<Event<Boolean>> = mDataLoading
 
     protected fun <T> onResult(mutableLiveData: MutableLiveData<T>? = null, result: Result<T>) {
-        when(result){
-            is Result.Loading->mDataLoading.value=Event(true)
-            is Result.Error->result.msg?.let {
-                mSnackBarText.value=Event(it)//let lấy chuoi msg vào Event(it) và gán mSnackBarText
+        when (result) {
+            is Result.Loading -> mDataLoading.value = Event(true)
+
+            is Result.Error -> {
+                mDataLoading.value = Event(false)
+                result.msg?.let { mSnackBarText.value = Event(it) }
             }
-            is Result.Success-> {
-                mDataLoading.value=Event(false)
-                result.data?.let {mutableLiveData?.value=it }
-                result.msg?.let { mSnackBarText.value=Event(it) }
+
+            is Result.Success -> {
+                mDataLoading.value = Event(false)
+                result.data?.let { mutableLiveData?.value = it }
+                result.msg?.let { mSnackBarText.value = Event(it) }
             }
         }
 

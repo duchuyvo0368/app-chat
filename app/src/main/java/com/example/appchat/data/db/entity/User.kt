@@ -5,7 +5,7 @@ import com.google.firebase.database.PropertyName
 data class User(
     @get:PropertyName("info") @set:PropertyName("info") var info: UserInfo = UserInfo(),
     @get:PropertyName("friends") @set:PropertyName("friends") var friends: HashMap<String, UserFriend> = HashMap(),
-    @get:PropertyName("notification") @set:PropertyName("notification") var notification: HashMap<String, UserNotification> = HashMap(),
+    @get:PropertyName("notifications") @set:PropertyName("notifications") var notifications: HashMap<String, UserNotification> = HashMap(),
     @get:PropertyName("sentRequest") @set:PropertyName("sentRequest") var sentRequest:HashMap<String,UserRequest> =HashMap()
     ) {
 

@@ -15,6 +15,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{()->viewmodel.selectUser(user)}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
@@ -38,6 +39,7 @@
                 android:layout_height="58dp"
                 android:layout_margin="0dp"
                 android:scaleType="centerCrop"
+                app:bind_image_url="@{user.info.profileImageUrl}"
                 tools:src="@tools:sample/avatars[0]" />
         </androidx.cardview.widget.CardView>
 

@@ -1,7 +1,7 @@
 package com.example.appchat
 
 import android.app.Application
-import com.example.appchat.ui.SharedPreferencesUtil
+import com.example.appchat.utils.SharedPreferencesUtil
 
 
 class AppChat : Application() {

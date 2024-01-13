@@ -1,4 +1,4 @@
-package com.example.appchat.ui
+package com.example.appchat.utils
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,5 +15,8 @@ object SharedPreferencesUtil {
     }
     fun saveUserID(context: Context,userID:String){
         getPrefs(context).edit().putString(KEY_USER_ID,userID).apply()
+    }
+    fun removeUserID(context: Context) {
+        getPrefs(context).edit().remove(KEY_USER_ID).apply()
     }
 }

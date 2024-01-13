@@ -1,4 +1,4 @@
-package com.example.appchat.ui
+package com.example.appchat.utils
 
 import androidx.lifecycle.MutableLiveData
 //mở rộng MutableLiveData
@@ -14,4 +14,10 @@ fun <T> MutableLiveData<MutableList<T>>.updateItemAt(item:T,index:Int){
     this.value?.let { newList.addAll(it) }//nếu khác null thêm các phần tử vào newList
     newList[index]=item//vị trí cập nhật
     this.value=newList//gán newList cho MutableLiveData
+}
+fun <T> MutableLiveData<MutableList<T>>.removeItem(item: T) {
+    val newList = mutableListOf<T>()
+    this.value?.let { newList.addAll(it) }
+    newList.remove(item)
+    this.value = newList
 }

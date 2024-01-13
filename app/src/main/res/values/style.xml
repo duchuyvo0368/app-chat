@@ -2,7 +2,7 @@
 <resources>
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/purple_700</item>
         <item name="colorAccent">@color/purple_500</item>
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>

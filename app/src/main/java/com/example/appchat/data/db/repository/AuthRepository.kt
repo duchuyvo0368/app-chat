@@ -1,33 +1,38 @@
 package com.example.appchat.data.db.repository
 
-import com.example.appchat.data.Result
 import com.example.appchat.data.db.remote.FirebaseAuthSource
+import com.example.appchat.data.db.remote.FirebaseAuthStateObserver
 import com.example.appchat.data.model.CreateUser
 import com.example.appchat.data.model.Login
-import com.google.firebase.auth.FirebaseAuth
+import com.example.appchat.data.Result
 import com.google.firebase.auth.FirebaseUser
 
-class AuthRepository {
-    private val firebaseAuthSource = FirebaseAuthSource()
+class AuthRepository{
+    private val firebaseAuthService = FirebaseAuthSource()
 
+    fun observeAuthState(stateObserver: FirebaseAuthStateObserver, b: ((Result<FirebaseUser>) -> Unit)){
+        firebaseAuthService.attachAuthStateObserver(stateObserver,b)
+    }
 
-    fun loginUser(login: Login, b: (Result<FirebaseUser>) -> Unit) {
+    fun loginUser(login: Login, b: ((Result<FirebaseUser>) -> Unit)) {
         b.invoke(Result.Loading)
-        firebaseAuthSource.loginWithEmailAndPassword(login)
-            .addOnSuccessListener {//khi requestLogin() được thực hiện xong thì gọi đến addOnComplete..
-                //invoke() truyen kq den Result
-                b.invoke(Result.Success(it.user))//dang nha thanh cong
-            }.addOnFailureListener {
-            b.invoke(Result.Error(msg = it.message))//dang nhap that bai
+        firebaseAuthService.loginWithEmailAndPassword(login).addOnSuccessListener {
+            b.invoke(Result.Success(it.user))
+        }.addOnFailureListener {
+            b.invoke(Result.Error(msg = it.message))
         }
     }
 
-    fun createUser(createUser: CreateUser, b: (Result<FirebaseUser>) -> Unit) {
+    fun createUser(createUser: CreateUser, b: ((Result<FirebaseUser>) -> Unit)) {
         b.invoke(Result.Loading)
-        firebaseAuthSource.createUser(createUser).addOnSuccessListener {
+        firebaseAuthService.createUser(createUser).addOnSuccessListener {
             b.invoke(Result.Success(it.user))
         }.addOnFailureListener {
-            b.invoke(Result.Error(it.message))
+            b.invoke(Result.Error(msg = it.message))
         }
+    }
+
+    fun logoutUser() {
+        firebaseAuthService.logout()
     }
 }

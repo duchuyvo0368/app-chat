@@ -1,32 +1,28 @@
 package com.example.appchat.ui.start
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.appchat.R
 import com.example.appchat.data.EventObserver
 import com.example.appchat.databinding.FragmentStartBinding
+import com.example.appchat.utils.SharedPreferencesUtil
 
 
 class StartFragment : Fragment() {
-    private lateinit var viewDataBinding: FragmentStartBinding
-    private val viewModel by viewModels<StartViewModel>()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
+    private val viewModel by viewModels<StartViewModel>()
+    private lateinit var viewDataBinding: FragmentStartBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        viewDataBinding = FragmentStartBinding.inflate(inflater, container, false)
-            .apply { viewmodel = viewModel }
-        //quan sát dữ liệu LiveData và cập nhập lên UI
+        viewDataBinding =
+            FragmentStartBinding.inflate(inflater, container, false).apply { viewmodel = viewModel }
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
         setHasOptionsMenu(false)
         return viewDataBinding.root
@@ -34,16 +30,25 @@ class StartFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setupObserver()
+        setupObservers()
+
+        if (userIsAlreadyLoggedIn()) {
+            navigateDirectlyToChats()
+        }
     }
 
-    private fun setupObserver() {
-        viewModel.loginEvent.observe(viewLifecycleOwner, EventObserver {
-            navigateToLogin()
-        })
-        viewModel.createAccountEvent.observe(viewLifecycleOwner,EventObserver{
-            navigateToCreateAccount()
-        })
+    private fun userIsAlreadyLoggedIn(): Boolean {
+        return SharedPreferencesUtil.getUserID(requireContext()) != null
+    }
+
+    private fun setupObservers() {
+        viewModel.loginEvent.observe(viewLifecycleOwner, EventObserver { navigateToLogin() })
+        viewModel.createAccountEvent.observe(
+            viewLifecycleOwner, EventObserver { navigateToCreateAccount() })
+    }
+
+    private fun navigateDirectlyToChats() {
+        findNavController().navigate(R.id.action_startFragment_to_navigation_chats)
     }
 
     private fun navigateToLogin() {
@@ -51,6 +56,6 @@ class StartFragment : Fragment() {
     }
 
     private fun navigateToCreateAccount() {
-        findNavController().navigate(R.id.action_startFragment_to_registerFragment)
+        findNavController().navigate(R.id.action_startFragment_to_createAccountFragment)
     }
 }

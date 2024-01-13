@@ -1,4 +1,4 @@
-package com.example.appchat.ui
+package com.example.appchat.utils
 
 import com.google.firebase.database.DataSnapshot
 

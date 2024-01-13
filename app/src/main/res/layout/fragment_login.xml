@@ -38,7 +38,15 @@
                     android:orientation="horizontal"
                     >
 
-
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Login"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlSymmetry" />
                 </LinearLayout>
 
 
@@ -180,7 +188,7 @@
                 android:layout_marginEnd="20dp"
                 android:alpha="0.7"
                 android:backgroundTint="@color/purple_500"
-                android:enabled="@{!viewmodel.isLoginIn()}"
+                android:enabled="@{!viewmodel.isLoggingIn()}"
                 android:onClick="@{()->viewmodel.loginPressed()}"
                 android:text="Log in"
                 android:textAllCaps="false"
@@ -237,7 +245,6 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:onClickListener="@{() ->viewmodel.goToCreateAccountPressed()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

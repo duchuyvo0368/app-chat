@@ -17,7 +17,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="?android:attr/windowBackground"
-            tools:context=".ui.start.login.LoginFragment">
+           >
 
             <LinearLayout
                 android:id="@+id/linear1"
@@ -32,7 +32,22 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:text="Register"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
@@ -114,7 +129,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:inputType="textPersonName"
-                        android:text="@={viewmodel.displayName}" />
+                        android:text="@={viewmodel.displayNameText}" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -148,8 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="Password"
-                    android:textColor="@color/black"
+                    android:text="@string/password"
                     android:textSize="16sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -167,9 +181,8 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <include
+            <View
                 android:id="@+id/passwordStrengthDashboard"
-                layout="@layout/layout_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
@@ -269,7 +282,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:alpha="0.7"
-                    android:onClickListener="@{() -> viewmodel.goToLoginAccountPressed()}"
+
                     android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center_horizontal"
                     android:text="Log in"

@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.appchat.data.Event
-import com.example.appchat.ui.DefaultViewModel
 
 class StartViewModel : ViewModel() {
+
     private val _loginEvent = MutableLiveData<Event<Unit>>()
     private val _createAccountEvent = MutableLiveData<Event<Unit>>()
 
@@ -14,10 +14,12 @@ class StartViewModel : ViewModel() {
     val createAccountEvent: LiveData<Event<Unit>> = _createAccountEvent
 
     fun goToLoginPressed() {
-        _loginEvent.value= Event(Unit)
-    }
-    fun goToCreateAccountPressed(){
-        _createAccountEvent.value=Event(Unit)
+        _loginEvent.value = Event(Unit)
     }
 
+    fun goToCreateAccountPressed() {
+        _createAccountEvent.value = Event(Unit)
+    }
 }
+
+

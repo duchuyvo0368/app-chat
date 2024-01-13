@@ -14,9 +14,9 @@ import com.example.appchat.data.Event
 import com.example.appchat.data.db.entity.Chat
 import com.example.appchat.data.db.entity.UserFriend
 import com.example.appchat.data.db.entity.UserInfo
-import com.example.appchat.ui.addNewItem
-import com.example.appchat.ui.convertTowUserIDs
-import com.example.appchat.ui.updateItemAt
+import com.example.appchat.utils.addNewItem
+import com.example.appchat.utils.convertTowUserIDs
+import com.example.appchat.utils.updateItemAt
 
 
 //tạo ra môt viewmodel để truyen tham so vào hàm khoi tao
@@ -74,7 +74,7 @@ class ChatsViewModel(val myUserID: String) : DefaultViewModel() {
     private fun loadAndObserveChat(userInfo: UserInfo) {
         val observer = FirebaseReferenceValueObserver()
         firebaseReferenceObserverList.add(observer)
-        repository.loadAndObserveChat(convertTowUserIDs(myUserID,userInfo.id),observer){result:Result<Chat>->
+        repository.loadAndObserveChat(convertTowUserIDs(myUserID,userInfo.id),observer){ result:Result<Chat>->
             if (result is Result.Success) {
                 _updatedChatWithUserInfo.value=result.data?.let { ChatWithUserInfo(it,userInfo) }
             }else if (result is Result.Error) {

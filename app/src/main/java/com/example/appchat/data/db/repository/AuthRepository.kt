@@ -1,21 +1,38 @@
 package com.example.appchat.data.db.repository
-import com.example.appchat.data.Resource
-import com.example.appchat.data.db.remote.FirebaseAuth
+
+import com.example.appchat.data.db.remote.FirebaseAuthSource
+import com.example.appchat.data.db.remote.FirebaseAuthStateObserver
+import com.example.appchat.data.model.CreateUser
 import com.example.appchat.data.model.Login
+import com.example.appchat.data.Result
 import com.google.firebase.auth.FirebaseUser
 
-class AuthRepository {
-    private val firebaseAuth= FirebaseAuth()
+class AuthRepository{
+    private val firebaseAuthService = FirebaseAuthSource()
 
+    fun observeAuthState(stateObserver: FirebaseAuthStateObserver, b: ((Result<FirebaseUser>) -> Unit)){
+        firebaseAuthService.attachAuthStateObserver(stateObserver,b)
+    }
 
-    fun loginUser(login: Login,b:(Resource<FirebaseUser>)->Unit) {
-        firebaseAuth.requestLogin(login).addOnCompleteListener {//khi requestLogin() được thực hiện xong thì gọi đến addOnComplete..
-            if (it.isSuccessful){//đăng nhập thành công
-                b.invoke(Resource.Success(it.result.user))
-            }else{
-                b.invoke(Resource.Error(null,"Đăng nhập không thành công"))
-            }
+    fun loginUser(login: Login, b: ((Result<FirebaseUser>) -> Unit)) {
+        b.invoke(Result.Loading)
+        firebaseAuthService.loginWithEmailAndPassword(login).addOnSuccessListener {
+            b.invoke(Result.Success(it.user))
+        }.addOnFailureListener {
+            b.invoke(Result.Error(msg = it.message))
         }
     }
 
+    fun createUser(createUser: CreateUser, b: ((Result<FirebaseUser>) -> Unit)) {
+        b.invoke(Result.Loading)
+        firebaseAuthService.createUser(createUser).addOnSuccessListener {
+            b.invoke(Result.Success(it.user))
+        }.addOnFailureListener {
+            b.invoke(Result.Error(msg = it.message))
+        }
+    }
+
+    fun logoutUser() {
+        firebaseAuthService.logout()
+    }
 }

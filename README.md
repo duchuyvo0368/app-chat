@@ -1,4 +1,3 @@
-<video width="640px" height="360px" controls>
-  <source src="https://github.com/duchuyvo0368/app-chat/blob/master/design/8835946754983615532.mp4" type="video/mp4">
-  Video
-</video>
+
+https://github.com/duchuyvo0368/app-chat/assets/86065259/8c333f1f-0220-41f8-a267-48c5c81c675f
+

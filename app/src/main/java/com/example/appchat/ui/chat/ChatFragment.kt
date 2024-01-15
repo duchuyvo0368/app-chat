@@ -67,12 +67,7 @@ class ChatFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.back -> {
-                findNavController().popBackStack()
-                return true
-            }
-        }
+
         return super.onOptionsItemSelected(item)
     }
 

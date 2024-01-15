@@ -55,7 +55,7 @@
 
             <EditText
                 android:id="@+id/editTextMessage"
-                android:layout_width="0dp"
+                android:layout_width="286dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="16dp"

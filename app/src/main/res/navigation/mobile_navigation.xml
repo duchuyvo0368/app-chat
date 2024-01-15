@@ -19,7 +19,7 @@
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
     <fragment
-        android:id="@+id/navigation_user"
+        android:id="@+id/navigation_users"
         android:name="com.example.appchat.ui.users.UsersFragment"
         android:label="@string/title_users"
         tools:layout="@layout/fragment_users">

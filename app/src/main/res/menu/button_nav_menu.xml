@@ -9,7 +9,7 @@
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/baseline_notifications_24"
         android:title="Notifications"/>
-    <item android:id="@+id/navigation_user"
+    <item android:id="@+id/navigation_users"
         android:icon="@drawable/baseline_person_24"
         android:title="Users"
         />

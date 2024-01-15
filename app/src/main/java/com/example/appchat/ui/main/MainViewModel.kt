@@ -55,7 +55,7 @@ class MainViewModel : ViewModel() {
     private fun startObservingNotifications() {
         dbRepository.loadAndObserveUserNotifications(userID, fbRefNotificationsObserver) { result: Result<MutableList<UserNotification>> ->
             if (result is Result.Success) {
-                _userNotificationsList.value = result.data!!
+                _userNotificationsList.value = result.data
             }
         }
     }

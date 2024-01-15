@@ -33,6 +33,8 @@ class RegisterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val supportActionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        supportActionBar!!.hide()
         setupObservers()
     }
 
@@ -62,6 +64,13 @@ class RegisterFragment : Fragment() {
         })
     }
 
+
+    override fun onDestroy() {
+        val supportActionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        supportActionBar!!.show()
+        super.onDestroy()
+
+    }
     private fun navigateToChats() {
         findNavController().navigate(R.id.action_registerFragment_to_navigation_chats)
     }

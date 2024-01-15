@@ -13,7 +13,7 @@
     <string name="display_name">DisplayName</string>
     <string name="status">Status</string>
     <string name="notifications_title">Notifications</string>
-    <string name="title_settings">title setting</string>
+    <string name="title_settings">Setting</string>
     <string name="users">Users</string>
     <string name="profile">Profile</string>
     <string name="decline_friend_request">decline friend request</string>

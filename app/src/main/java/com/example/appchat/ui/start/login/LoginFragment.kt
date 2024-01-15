@@ -22,7 +22,6 @@ class LoginFragment : Fragment() {
 
     private val viewModel by viewModels<LoginViewModel>()
     private lateinit var viewDataBinding: FragmentLoginBinding
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -31,6 +30,8 @@ class LoginFragment : Fragment() {
         viewDataBinding.lifecycleOwner = this.viewLifecycleOwner
 
         setHasOptionsMenu(true)
+       val supportActionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        supportActionBar!!.hide()
         return viewDataBinding.root
     }
 
@@ -57,6 +58,11 @@ class LoginFragment : Fragment() {
         })
     }
 
+    override fun onDestroy() {
+        val supportActionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        supportActionBar!!.show()
+        super.onDestroy()
+    }
 
     private fun navigateToChats() {
         findNavController().navigate(R.id.action_loginFragment_to_navigation_chats)

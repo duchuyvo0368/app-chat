@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.appchat.AppChat
 import com.example.appchat.R
@@ -44,12 +45,7 @@ class ProfileFragment : Fragment() {
         setupObservers()
     }
 
-    fun popBack() {
-        viewDataBinding.back.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
-    }
 
     private fun setupObservers() {
         viewModel.dataLoading.observe(viewLifecycleOwner,
